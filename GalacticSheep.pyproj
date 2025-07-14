@@ -25,9 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="stats.txt" />
+    <Folder Include="sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

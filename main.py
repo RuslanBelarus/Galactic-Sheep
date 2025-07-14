@@ -6,6 +6,7 @@ import keyboard
 #initializating
 pygame.init()
 pygame.font.init()
+pygame.mixer.init()
 
 #systrem global variables
 screen = pygame.display.set_mode((18*32, 20*32))
@@ -145,6 +146,8 @@ class Player(Entity):
         #Bullet pull delay
         if self.delay > 0: self.delay -= 1
         if pygame.mouse.get_pressed()[0] and self.delay <= 0:
+            pygame.mixer.music.load('sounds/pull.mp3')
+            pygame.mixer.music.play()
             enemy[1].append(Bullet(self.x+23, self.y))
             self.delay = difficult*FPS
 
@@ -166,7 +169,7 @@ def start():
 
     #main loop
     while not WASTED:
-        
+
         #frame per tick
         clock.tick(FPS)
 
@@ -184,6 +187,8 @@ def start():
                         del enemy[0][i]
                         del enemy[1][j]
                         sheep.score += 20*0.5*difficult
+                        pygame.mixer.music.load('sounds/kill.mp3')
+                        pygame.mixer.music.play()
                         break
                 except: pass
 
@@ -191,6 +196,8 @@ def start():
         for i in range(len(enemy[2])):
             if enemy[2][i].hitbox.colliderect(sheep.hitbox):
                 WASTED = True
+                pygame.mixer.music.load('sounds/death.mp3')
+                pygame.mixer.music.play()
 
         #spawn of slime's
         spawn_delay -= 1
@@ -289,6 +296,8 @@ class Button:
 
         #condition
         if self.hitbox.colliderect(mouse_hitbox) and is_mouse_pressed:
+            pygame.mixer.music.load('sounds/click.mp3')
+            pygame.mixer.music.play()
             return True
         else:
             return False
@@ -367,4 +376,6 @@ def menu():
 #protection
 if __name__ == '__main__':
     #menu activation
+    pygame.mixer.music.load('sounds/background.mp3')
+    pygame.mixer.music.play(-1)
     menu()
